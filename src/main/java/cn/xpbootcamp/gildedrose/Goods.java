@@ -75,6 +75,10 @@ public class Goods {
                 }
                 currentQuantity = Math.min(currentQuantity, 50);
                 break;
+            case SULFURAS:
+                currentSellIn = this.sellIn;
+                currentQuantity = this.quantity;
+                break;
             default:
                 currentQuantity = this.quantity;
         }
