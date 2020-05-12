@@ -7,14 +7,6 @@ public class Goods {
     private int sellIn;
     private int quantity;
 
-    public Goods(String id, String name, GoodsType type, int sellIn, int quantity) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.sellIn = sellIn;
-        this.quantity = quantity;
-    }
-
     public String getId() {
         return id;
     }
@@ -55,7 +47,18 @@ public class Goods {
         this.quantity = quantity;
     }
 
-    public void passDays(int pastDays) {
+    public Goods(String id, String name, GoodsType type, int sellIn, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.sellIn = sellIn;
+        this.quantity = quantity;
+    }
 
+    public void passDays(int pastDays) {
+       int currentSellIn = this.sellIn - pastDays;
+       int currentQuantity = this.quantity - currentSellIn;
+       this.setSellIn(currentSellIn);
+       this.setQuantity(currentQuantity);
     }
 }
