@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gildedrose;
 
 public enum GoodsType {
-    NORMAL
+    NORMAL,
+    AGED_BRIE
 }

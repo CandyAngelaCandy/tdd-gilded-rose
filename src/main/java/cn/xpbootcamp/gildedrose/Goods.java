@@ -56,14 +56,15 @@ public class Goods {
     }
 
     public void passDays(int pastDays) {
-       int currentSellIn = this.sellIn - pastDays;
-       int currentQuantity;
-       if (currentSellIn >= 0) {
-           currentQuantity = this.quantity - currentSellIn;
-       } else {
-           currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
-       }
-       this.setSellIn(currentSellIn);
-       this.setQuantity(currentQuantity);
+        int currentSellIn = this.sellIn - pastDays;
+        int currentQuantity;
+        if (currentSellIn >= 0) {
+            currentQuantity = this.quantity - currentSellIn;
+        } else {
+            currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
+            currentQuantity = currentQuantity >= 0 ? currentQuantity : 0;
+        }
+        this.setSellIn(currentSellIn);
+        this.setQuantity(currentQuantity);
     }
 }
