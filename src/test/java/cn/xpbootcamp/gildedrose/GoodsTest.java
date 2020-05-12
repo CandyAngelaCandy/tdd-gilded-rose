@@ -44,4 +44,12 @@ class GoodsTest {
         assertEquals(-3, milk.getSellIn());
         assertEquals(36, milk.getQuantity());
     }
+
+    @Test
+    void should_get_sellIn_is_negative_11_quantity_is_50_when_past_21_days_given_a_Aged_Brie_with_sellIn_is_10_quantity_is_20() {
+        Goods milk = new Goods("N002", "agedBrie", GoodsType.AGED_BRIE, 10, 20);
+        milk.passDays(21);
+        assertEquals(-11, milk.getSellIn());
+        assertEquals(50, milk.getQuantity());
+    }
 }

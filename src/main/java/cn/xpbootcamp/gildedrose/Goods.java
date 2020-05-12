@@ -68,7 +68,11 @@ public class Goods {
                 }
                 break;
             case AGED_BRIE:
-                currentQuantity = this.quantity + pastDays;
+                if (currentSellIn >= 0) {
+                    currentQuantity = this.quantity + pastDays;
+                } else {
+                    currentQuantity = this.quantity + this.sellIn - 2 * currentSellIn;
+                }
                 break;
             default:
                 currentQuantity = this.quantity;
