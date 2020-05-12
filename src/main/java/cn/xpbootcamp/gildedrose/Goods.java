@@ -58,12 +58,22 @@ public class Goods {
     public void passDays(int pastDays) {
         int currentSellIn = this.sellIn - pastDays;
         int currentQuantity;
-        if (currentSellIn >= 0) {
-            currentQuantity = this.quantity - currentSellIn;
-        } else {
-            currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
-            currentQuantity = currentQuantity >= 0 ? currentQuantity : 0;
+        switch (this.type) {
+            case NORMAL:
+                if (currentSellIn >= 0) {
+                    currentQuantity = this.quantity - pastDays;
+                } else {
+                    currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
+                    currentQuantity = Math.max(currentQuantity, 0);
+                }
+                break;
+            case AGED_BRIE:
+                currentQuantity = this.quantity + pastDays;
+                break;
+            default:
+                currentQuantity = this.quantity;
         }
+
         this.setSellIn(currentSellIn);
         this.setQuantity(currentQuantity);
     }
