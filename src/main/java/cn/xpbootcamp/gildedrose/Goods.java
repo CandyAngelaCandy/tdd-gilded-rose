@@ -57,7 +57,12 @@ public class Goods {
 
     public void passDays(int pastDays) {
        int currentSellIn = this.sellIn - pastDays;
-       int currentQuantity = this.quantity - currentSellIn;
+       int currentQuantity;
+       if (currentSellIn >= 0) {
+           currentQuantity = this.quantity - currentSellIn;
+       } else {
+           currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
+       }
        this.setSellIn(currentSellIn);
        this.setQuantity(currentQuantity);
     }
