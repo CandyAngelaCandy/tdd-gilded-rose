@@ -60,4 +60,20 @@ class GoodsTest {
         assertEquals(5, milk.getSellIn());
         assertEquals(0, milk.getQuantity());
     }
+
+    @Test
+    void should_get_sellIn_is_5_quantity_is_50_when_past_5_days_given_a_Aged_Brie_with_sellIn_is_10_quantity_is_48() {
+        Goods milk = new Goods("N002", "agedBrie", GoodsType.AGED_BRIE, 10, 48);
+        milk.passDays(5);
+        assertEquals(5, milk.getSellIn());
+        assertEquals(50, milk.getQuantity());
+    }
+
+    @Test
+    void should_get_sellIn_is_5_quantity_is_20_when_past_50_days_given_a_Sulfuras_with_sellIn_is_5_quantity_is_20() {
+        Goods milk = new Goods("N003", "Sulfuras", GoodsType.SULFURAS, 5, 20);
+        milk.passDays(50);
+        assertEquals(5, milk.getSellIn());
+        assertEquals(20, milk.getQuantity());
+    }
 }
