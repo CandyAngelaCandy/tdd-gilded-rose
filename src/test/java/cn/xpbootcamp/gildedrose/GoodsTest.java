@@ -52,4 +52,12 @@ class GoodsTest {
         assertEquals(-11, milk.getSellIn());
         assertEquals(50, milk.getQuantity());
     }
+
+    @Test
+    void should_get_sellIn_is_5_quantity_is_0_when_past_5_days_given_a_normal_goods_with_sellIn_is_10_quantity_is_2() {
+        Goods milk = new Goods("N001", "milk", GoodsType.NORMAL, 10, 2);
+        milk.passDays(5);
+        assertEquals(5, milk.getSellIn());
+        assertEquals(0, milk.getQuantity());
+    }
 }

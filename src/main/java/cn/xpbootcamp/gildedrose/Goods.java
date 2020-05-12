@@ -64,8 +64,8 @@ public class Goods {
                     currentQuantity = this.quantity - pastDays;
                 } else {
                     currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
-                    currentQuantity = Math.max(currentQuantity, 0);
                 }
+                currentQuantity = Math.max(currentQuantity, 0);
                 break;
             case AGED_BRIE:
                 if (currentSellIn >= 0) {
@@ -73,6 +73,7 @@ public class Goods {
                 } else {
                     currentQuantity = this.quantity + this.sellIn - 2 * currentSellIn;
                 }
+                currentQuantity = Math.min(currentQuantity, 50);
                 break;
             default:
                 currentQuantity = this.quantity;
