@@ -19,4 +19,12 @@ public class GoodsTest {
         assertEquals(milk.getSellIn(), -1);
         assertEquals(milk.getQuantity(), 8);
     }
+
+    @Test
+    public void should_get_sellIn_is_negative_6_quantity_is_0_when_past_16_days_given_a_normal_goods_with_sellIn_is_10_quantity_is_20() {
+        Goods milk = new Goods("N001", "milk", GoodsType.NORMAL, 10, 20);
+        milk.passDays(16);
+        assertEquals(milk.getSellIn(), -6);
+        assertEquals(milk.getQuantity(), 0);
+    }
 }
