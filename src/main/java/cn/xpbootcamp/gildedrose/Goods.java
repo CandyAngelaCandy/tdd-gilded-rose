@@ -80,7 +80,11 @@ public class Goods {
                 currentQuantity = this.quantity;
                 break;
             case BACKSTAGE_PASS:
-                currentQuantity = this.quantity + pastDays;
+                if (currentSellIn < 10) {
+                    currentQuantity = this.quantity + this.sellIn - 10 + 2 * (10 -currentSellIn);
+                } else {
+                    currentQuantity = this.quantity + pastDays;
+                }
                 break;
             default:
                 currentQuantity = this.quantity;
