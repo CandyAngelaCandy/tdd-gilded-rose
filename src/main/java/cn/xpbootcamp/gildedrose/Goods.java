@@ -1,6 +1,12 @@
 package cn.xpbootcamp.gildedrose;
 
 public class Goods {
+    public static final int GOODS_MAX_VALUE = 50;
+    public static final int GOODS_MIN_VALUE = 0;
+    public static final int FIVE_DAYS_TO_SELL_IN = 5;
+    public static final int TEN_DAYS_TO_SELL_IN = 10;
+    public static final int TWO_POINT_FOR_SPEED = 2;
+    public static final int THREE_POINT_FOR_SPEED = 3;
     private String id;
     private String name;
     private GoodsType type;
@@ -63,17 +69,17 @@ public class Goods {
                 if (currentSellIn >= 0) {
                     currentQuantity = this.quantity - pastDays;
                 } else {
-                    currentQuantity = this.quantity - this.sellIn + 2 * currentSellIn;
+                    currentQuantity = this.quantity - this.sellIn + TWO_POINT_FOR_SPEED * currentSellIn;
                 }
-                currentQuantity = Math.max(currentQuantity, 0);
+                currentQuantity = Math.max(currentQuantity, GOODS_MIN_VALUE);
                 break;
             case AGED_BRIE:
                 if (currentSellIn >= 0) {
                     currentQuantity = this.quantity + pastDays;
                 } else {
-                    currentQuantity = this.quantity + this.sellIn - 2 * currentSellIn;
+                    currentQuantity = this.quantity + this.sellIn - TWO_POINT_FOR_SPEED * currentSellIn;
                 }
-                currentQuantity = Math.min(currentQuantity, 50);
+                currentQuantity = Math.min(currentQuantity, GOODS_MAX_VALUE);
                 break;
             case SULFURAS:
                 currentSellIn = this.sellIn;
@@ -81,19 +87,21 @@ public class Goods {
                 break;
             case BACKSTAGE_PASS:
                 if (currentSellIn < 0) {
-                    currentQuantity = 0;
-                } else if (currentSellIn < 5 && this.sellIn >= 10) {
-                    currentQuantity = this.quantity + this.sellIn - 10 + 2 * 5 + 3 * (pastDays - 5 - (this.sellIn - 10));
-                } else if (currentSellIn < 10 && this.sellIn >= 10) {
-                    currentQuantity = this.quantity + this.sellIn - 10 + 2 * (10 - currentSellIn);
-                } else if (this.sellIn >= 5 && this.sellIn < 10 && currentSellIn >= 5) {
-                    currentQuantity = this.quantity + 2 * pastDays;
-                } else if (this.sellIn >= 5 && this.sellIn < 10) {
-                    currentQuantity = this.quantity + 2 * (this.sellIn - 5) + 3 * (pastDays - (this.sellIn - 5));
+                    currentQuantity = GOODS_MIN_VALUE;
+                } else if (currentSellIn < FIVE_DAYS_TO_SELL_IN && this.sellIn >= TEN_DAYS_TO_SELL_IN) {
+                    currentQuantity = this.quantity + this.sellIn - TEN_DAYS_TO_SELL_IN + TWO_POINT_FOR_SPEED * FIVE_DAYS_TO_SELL_IN + THREE_POINT_FOR_SPEED * (pastDays - FIVE_DAYS_TO_SELL_IN - (this.sellIn - TEN_DAYS_TO_SELL_IN));
+                } else if (currentSellIn < TEN_DAYS_TO_SELL_IN && this.sellIn >= TEN_DAYS_TO_SELL_IN) {
+                    currentQuantity = this.quantity + this.sellIn - TEN_DAYS_TO_SELL_IN + TWO_POINT_FOR_SPEED * (TEN_DAYS_TO_SELL_IN - currentSellIn);
+                } else if (this.sellIn >= FIVE_DAYS_TO_SELL_IN && this.sellIn < TEN_DAYS_TO_SELL_IN && currentSellIn >= FIVE_DAYS_TO_SELL_IN) {
+                    currentQuantity = this.quantity + TWO_POINT_FOR_SPEED * pastDays;
+                } else if (this.sellIn >= FIVE_DAYS_TO_SELL_IN && this.sellIn < TEN_DAYS_TO_SELL_IN) {
+                    currentQuantity = this.quantity + TWO_POINT_FOR_SPEED * (this.sellIn - FIVE_DAYS_TO_SELL_IN) + THREE_POINT_FOR_SPEED * (pastDays - (this.sellIn - FIVE_DAYS_TO_SELL_IN));
+                } else if (this.sellIn < FIVE_DAYS_TO_SELL_IN) {
+                    currentQuantity = this.quantity + THREE_POINT_FOR_SPEED * pastDays;
                 } else {
                     currentQuantity = this.quantity + pastDays;
                 }
-                currentQuantity = Math.min(currentQuantity, 50);
+                currentQuantity = Math.min(currentQuantity, GOODS_MAX_VALUE);
                 break;
             default:
                 currentQuantity = this.quantity;
