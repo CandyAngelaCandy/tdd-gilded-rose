@@ -89,13 +89,20 @@ public class Goods {
                 if (currentSellIn < 0) {
                     currentQuantity = GOODS_MIN_VALUE;
                 } else if (currentSellIn < FIVE_DAYS_TO_SELL_IN && this.sellIn >= TEN_DAYS_TO_SELL_IN) {
-                    currentQuantity = this.quantity + this.sellIn - TEN_DAYS_TO_SELL_IN + TWO_POINT_FOR_SPEED * FIVE_DAYS_TO_SELL_IN + THREE_POINT_FOR_SPEED * (pastDays - FIVE_DAYS_TO_SELL_IN - (this.sellIn - TEN_DAYS_TO_SELL_IN));
+                    int addedValueBeforeTenDays = this.sellIn - TEN_DAYS_TO_SELL_IN;
+                    int addedValueBetweenFiveAndTenDays = TWO_POINT_FOR_SPEED * FIVE_DAYS_TO_SELL_IN;
+                    int addedValueInFiveDays = THREE_POINT_FOR_SPEED * (pastDays - FIVE_DAYS_TO_SELL_IN - (this.sellIn - TEN_DAYS_TO_SELL_IN));
+                    currentQuantity = this.quantity + addedValueBeforeTenDays + addedValueBetweenFiveAndTenDays + addedValueInFiveDays;
                 } else if (currentSellIn < TEN_DAYS_TO_SELL_IN && this.sellIn >= TEN_DAYS_TO_SELL_IN) {
-                    currentQuantity = this.quantity + this.sellIn - TEN_DAYS_TO_SELL_IN + TWO_POINT_FOR_SPEED * (TEN_DAYS_TO_SELL_IN - currentSellIn);
+                    int addedValueBeforeTenDays = this.sellIn - TEN_DAYS_TO_SELL_IN;
+                    int addedBetweenInTenDays = TWO_POINT_FOR_SPEED * (TEN_DAYS_TO_SELL_IN - currentSellIn);
+                    currentQuantity = this.quantity + addedValueBeforeTenDays + addedBetweenInTenDays;
                 } else if (this.sellIn >= FIVE_DAYS_TO_SELL_IN && this.sellIn < TEN_DAYS_TO_SELL_IN && currentSellIn >= FIVE_DAYS_TO_SELL_IN) {
                     currentQuantity = this.quantity + TWO_POINT_FOR_SPEED * pastDays;
                 } else if (this.sellIn >= FIVE_DAYS_TO_SELL_IN && this.sellIn < TEN_DAYS_TO_SELL_IN) {
-                    currentQuantity = this.quantity + TWO_POINT_FOR_SPEED * (this.sellIn - FIVE_DAYS_TO_SELL_IN) + THREE_POINT_FOR_SPEED * (pastDays - (this.sellIn - FIVE_DAYS_TO_SELL_IN));
+                    int addedValueBeforeFiveDays = TWO_POINT_FOR_SPEED * (this.sellIn - FIVE_DAYS_TO_SELL_IN);
+                    int addedValueInFiveDays = THREE_POINT_FOR_SPEED * (pastDays - (this.sellIn - FIVE_DAYS_TO_SELL_IN));
+                    currentQuantity = this.quantity + addedValueBeforeFiveDays + addedValueInFiveDays;
                 } else if (this.sellIn < FIVE_DAYS_TO_SELL_IN) {
                     currentQuantity = this.quantity + THREE_POINT_FOR_SPEED * pastDays;
                 } else {
