@@ -87,6 +87,7 @@ public class Goods {
                 } else {
                     currentQuantity = this.quantity + pastDays;
                 }
+                currentQuantity = Math.min(currentQuantity, 50);
                 break;
             default:
                 currentQuantity = this.quantity;
