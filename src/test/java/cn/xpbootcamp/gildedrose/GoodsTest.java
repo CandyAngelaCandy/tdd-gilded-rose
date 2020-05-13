@@ -116,4 +116,12 @@ class GoodsTest {
         assertEquals(-1, milk.getSellIn());
         assertEquals(0, milk.getQuantity());
     }
+
+    @Test
+    void should_get_sellIn_is_6_quantity_is_34_when_past_2_days_given_a_Backstage_Pass_with_sellIn_is_8_quantity_is_30() {
+        Goods milk = new Goods("N004", "Backstage_Pass", GoodsType.BACKSTAGE_PASS, 8, 30);
+        milk.passDays(2);
+        assertEquals(6, milk.getSellIn());
+        assertEquals(34, milk.getQuantity());
+    }
 }
