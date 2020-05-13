@@ -12,4 +12,6 @@
 12. Given 后台门票SellIn = 15，Quality = 30, when 过去了16天，Then SellIn = -1, Quality = 0
 13. Given 普通商品SellIn = 10，Quality = 2，When 过去了5天， Then SellIn = 5, Quality = 0
 14. Given 陈年干酪SellIn = 10，Quality = 48，When 过去了5天， Then SellIn = 5, Quality = 50
-
+15. Given 后台门票SellIn = 8，Quality = 30, when 过去了2天，Then SellIn = 6, Quality = 34
+16. Given 后台门票SellIn = 8，Quality = 30, when 过去了4天，Then SellIn = 4, Quality = 39
+16. Given 后台门票SellIn = 3，Quality = 30, when 过去了2天，Then SellIn = 1, Quality = 36
