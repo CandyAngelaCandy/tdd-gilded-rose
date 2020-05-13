@@ -86,8 +86,10 @@ public class Goods {
                     currentQuantity = this.quantity + this.sellIn - 10 + 2 * 5 + 3 * (pastDays - 5 - (this.sellIn - 10));
                 } else if (currentSellIn < 10 && this.sellIn >= 10) {
                     currentQuantity = this.quantity + this.sellIn - 10 + 2 * (10 - currentSellIn);
-                } else if (this.sellIn >= 5 && this.sellIn < 10) {
+                } else if (this.sellIn >= 5 && this.sellIn < 10 && currentSellIn >= 5) {
                     currentQuantity = this.quantity + 2 * pastDays;
+                } else if (this.sellIn >= 5 && this.sellIn < 10) {
+                    currentQuantity = this.quantity + 2 * (this.sellIn - 5) + 3 * (pastDays - (this.sellIn - 5));
                 } else {
                     currentQuantity = this.quantity + pastDays;
                 }
