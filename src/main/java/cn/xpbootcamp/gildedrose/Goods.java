@@ -79,6 +79,9 @@ public class Goods {
                 currentSellIn = this.sellIn;
                 currentQuantity = this.quantity;
                 break;
+            case BACKSTAGE_PASS:
+                currentQuantity = this.quantity + pastDays;
+                break;
             default:
                 currentQuantity = this.quantity;
         }
